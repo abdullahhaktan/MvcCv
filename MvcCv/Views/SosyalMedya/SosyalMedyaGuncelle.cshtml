@@ -1,0 +1,32 @@
+﻿@using MvcCv.Models.Entity
+
+@model TblSosyalMedya
+
+@{
+    ViewBag.Title = "SosyalMedyaGetir";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Sosyal medya Güncelle</h5>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("SosyalMedyaGuncelle", "SosyalMedya", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.ID)
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Ad, htmlAttributes: new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.Ad, new { @class = "form-control", placeholder = "Başlık Girin" })
+                    @Html.ValidationMessageFor(model => model.Ad, "", new { @class = "text-danger" })
+                </div>
+
+                <button type="submit" class="btn btn-dark btn-sm">Kaydet</button>
+            }
+        </div>
+    </div>
+</div>

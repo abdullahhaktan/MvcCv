@@ -219,6 +219,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IletisimController.cs" />
     <Compile Include="Controllers\SertifikaController.cs" />
+    <Compile Include="Controllers\SosyalMedyaController.cs" />
     <Compile Include="Controllers\YetenekController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -274,6 +275,7 @@
     <Compile Include="Repositories\HakkımdaRepository.cs" />
     <Compile Include="Repositories\HobiRepository.cs" />
     <Compile Include="Repositories\SertifikaRepository.cs" />
+    <Compile Include="Repositories\SosyalMedyaRepository.cs" />
     <Compile Include="Repositories\YetenekRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1730,6 +1732,9 @@
     <Content Include="Views\Iletisim\Index.cshtml" />
     <Content Include="Views\Hobi\Index.cshtml" />
     <Content Include="Views\Default\SosyalMedya.cshtml" />
+    <Content Include="Views\SosyalMedya\Index.cshtml" />
+    <Content Include="Views\SosyalMedya\SosyalMedyaEkle.cshtml" />
+    <Content Include="Views\SosyalMedya\SosyalMedyaGuncelle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AdminLTE-3.0.4\plugins\inputmask\min\inputmask\dependencyLibs\" />
