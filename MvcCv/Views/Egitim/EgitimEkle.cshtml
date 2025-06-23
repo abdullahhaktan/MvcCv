@@ -1,0 +1,58 @@
+﻿@model MvcCv.Models.Entity.TblEgitimlerim
+
+@{
+    ViewBag.Title = "EgitimEkle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Yeni Eğitim Ekle</h5>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("EgitimEkle", "Egitim", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="mb-3">
+                    @Html.LabelFor(e => e.Baslik, new { @class = "form-label" })
+                    @Html.TextBoxFor(e => e.Baslik, new { @class = "form-control", placeholder = "Başlık girin" })
+                    @Html.ValidationMessageFor(e => e.Baslik, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(e => e.Altbaslik1, new { @class = "form-label" })
+                    @Html.TextBoxFor(e => e.Altbaslik1, new { @class = "form-control", placeholder = "Altbaşlık girin" })
+                    @Html.ValidationMessageFor(e => e.Altbaslik1, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.AltBaslik2, new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.AltBaslik2, new { @class = "form-control", placeholder = "Daha detaylı alt başlık girin" })
+                    @Html.ValidationMessageFor(m => m.AltBaslik2, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.Tarih, new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.Tarih, new { @class = "form-control", type = "date", placeholder = "Tarih girin" })
+                    @Html.ValidationMessageFor(m => m.Tarih, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.GNO, new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.GNO, new { @class = "form-control", placeholder = "Logo" })
+                    @Html.ValidationMessageFor(m => m.GNO, "", new { @class = "text-danger" })
+                </div>
+
+                <button type="submit" class="btn btn-dark btn-sm">Kaydet</button>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+﻿@using MvcCv.Models.Entity
+
+@model  TblOzelliklerim
+
+@{
+    ViewBag.Title = "OzellikGetir";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Yetenek Güncelle</h5>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("OzellikGuncelle", "Yetenek", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.ID)
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Yetenek, htmlAttributes: new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.Yetenek, new { @class = "form-control", placeholder = "Yetenek" })
+                    @Html.ValidationMessageFor(model => model.Yetenek, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Oran, htmlAttributes: new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.Oran, new { @class = "form-control", placeholder = "Oran" })
+                    @Html.ValidationMessageFor(model => model.Oran, "", new { @class = "text-danger" })
+                </div>
+
+
+                <button type="submit" class="btn btn-dark btn-sm">Kaydet</button>
+            }
+        </div>
+    </div>
+</div>

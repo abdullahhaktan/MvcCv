@@ -1,0 +1,36 @@
+﻿@using MvcCv.Models.Entity
+@model  TblHobilerim
+
+@{
+    ViewBag.Title = "Hobilerim";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-info text-white">
+            <h5 class="mb-0">Hobilerim</h5>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Index", "Hobi", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.ID)
+
+                <div class="mb-4">
+                    @Html.LabelFor(model => model.Aciklama1, htmlAttributes: new { @class = "form-label fw-bold" })
+                    @Html.TextAreaFor(model => model.Aciklama1, new { @class = "form-control", rows = 4, placeholder = "İlk hobi açıklamanızı yazınız..." })
+                    @Html.ValidationMessageFor(model => model.Aciklama1, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-4">
+                    @Html.LabelFor(model => model.Aciklama2, htmlAttributes: new { @class = "form-label fw-bold" })
+                    @Html.TextAreaFor(model => model.Aciklama2, new { @class = "form-control", rows = 4, placeholder = "İkinci hobi açıklamanızı yazınız..." })
+                    @Html.ValidationMessageFor(model => model.Aciklama2, "", new { @class = "text-danger" })
+                </div>
+
+                <button type="submit" class="btn btn-primary">Güncelle</button>
+            }
+        </div>
+    </div>
+</div>

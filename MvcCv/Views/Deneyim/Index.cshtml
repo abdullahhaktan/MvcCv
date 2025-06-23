@@ -1,0 +1,151 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc
+@using X.PagedList.Web.Common
+@model IPagedList<MvcCv.Models.Entity.TblDeneyimlerim>
+
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<!-- Gerekli CSS ve JS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<!-- Tabloya stil ekleyen CSS -->
+<style>
+    table td, table th {
+        padding: 12px 16px !important;
+        vertical-align: middle;
+    }
+
+    .table th {
+        background-color: #f8f9fa;
+        font-weight: bold;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .table {
+        margin-top: 20px;
+    }
+
+    .search-form {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .btn-sm {
+        padding: 6px 12px;
+        font-size: 0.875rem;
+    }
+</style>
+
+<!-- Sayfa içeriği -->
+<div class="container">
+    <!-- Arama Kutusu -->
+    <div class="d-flex justify-content-end search-form">
+        <form asp-action="Index" method="get" class="form-inline">
+            <input type="text" name="arama" class="form-control mr-2" placeholder="ara..." value="@Context.Request.QueryString["arama"]" />
+            <button type="submit" class="btn btn-outline-primary">
+                <i class="fas fa-search"></i> Ara
+            </button>
+        </form>
+    </div>
+
+    <!-- Özellik Tablosu -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Logo</th>
+                    <th>Başlık</th>
+                    <th>Alt Başlık</th>
+                    <th>Açıklama</th>
+                    <th>Tarih</th>
+                    <th>Sil</th>
+                    <th>Güncelle</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ozllk in Model)
+                {
+                    <tr>
+                        <td>@ozllk.ID</td>
+                        <td> <img src=@Url.Content(ozllk.Logo) style="width:50px;height:50px" /> </td>
+                        <td>@ozllk.Baslik</td>
+                        <td>@ozllk.AltBaslik</td>
+                        <td>@ozllk.Aciklama</td>
+                        <td>@ozllk.Tarih</td>
+                        <td>
+                            <a href="#" class="btn btn-danger btn-sm btn-sil" data-id="@ozllk.ID">Sil</a>
+                        </td>
+                        <td>
+                            <a href="/Deneyim/DeneyimGetir/@ozllk.ID" class="btn btn-primary btn-sm">Güncelle</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+    <a href="/Deneyim/DeneyimEkle" class="btn btn-dark btn-sm mt-3">Yeni Deneyim Girişi</a>
+
+    <div class="text-center mt-4">
+        @Html.PagedListPager(
+            Model,
+            page => Url.Action("Index", new { sayfa = page }),
+            new PagedListRenderOptions
+            {
+                UlElementClasses = new[] { "pagination" },
+                LiElementClasses = new[] { "page-item" },
+                PageClasses = new[] { "page-link" },
+                DisplayLinkToFirstPage = X.PagedList.Mvc.PagedListDisplayMode.Always,
+                DisplayLinkToLastPage = X.PagedList.Mvc.PagedListDisplayMode.Always,
+                DisplayLinkToPreviousPage = X.PagedList.Mvc.PagedListDisplayMode.Always,
+                DisplayLinkToNextPage = X.PagedList.Mvc.PagedListDisplayMode.Always,
+                MaximumPageNumbersToDisplay = 5
+            })
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Silme işlemi
+        $(".btn-sil").click(function (e) {
+            e.preventDefault();
+            var id = $(this).data("id");
+            swal({
+                title: "Emin misiniz?",
+                text: "Bu Deneyim silindikten sonra geri alınamaz!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    window.location.href = "/Deneyim/DeneyimSil/" + id;
+                } else {
+                    swal("Deneyim silinmedi.");
+                }
+            });
+        });
+
+        // TempData başarı mesajı gösterimi
+        var successMessage = '@(TempData["SuccessMessage"] ?? "")';
+        if (successMessage) {
+            swal({
+                title: "İşlem başarılı!",
+                text: successMessage,
+                icon: "success",
+                button: "Tamam",
+            });
+        }
+    });
+</script>

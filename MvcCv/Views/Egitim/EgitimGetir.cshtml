@@ -1,0 +1,56 @@
+﻿@using MvcCv.Models.Entity
+
+@model TblEgitimlerim
+
+@{
+    ViewBag.Title = "EgitimGetir";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Eğitim Güncelle</h5>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("EgitimGuncelle", "Egitim", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.ID)
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Baslik, htmlAttributes: new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.Baslik, new { @class = "form-control", placeholder = "Başlık Girin" })
+                    @Html.ValidationMessageFor(model => model.Baslik, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Altbaslik1, htmlAttributes: new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.Altbaslik1, new { @class = "form-control", placeholder = "Alt başlık" })
+                    @Html.ValidationMessageFor(model => model.Altbaslik1, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.AltBaslik2, htmlAttributes: new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.AltBaslik2, new { @class = "form-control", placeholder = "Açıklama girin" })
+                    @Html.ValidationMessageFor(model => model.AltBaslik2, "", new { @class = "text-danger" })
+                </div>  
+                
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.GNO, htmlAttributes: new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.GNO, new { @class = "form-control", placeholder = "Açıklama girin" })
+                    @Html.ValidationMessageFor(model => model.GNO, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Tarih, htmlAttributes: new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.Tarih, new { @class = "form-control", placeholder = "Tarih Girin" })
+                    @Html.ValidationMessageFor(model => model.Tarih, "", new { @class = "text-danger" })
+                </div>
+
+                <button type="submit" class="btn btn-dark btn-sm">Kaydet</button>
+            }
+        </div>
+    </div>
+</div>
