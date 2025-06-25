@@ -1,6 +1,7 @@
 ﻿using MvcCv.Models.Entity;
 using MvcCv.Repositories;
 using System;
+using System.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;

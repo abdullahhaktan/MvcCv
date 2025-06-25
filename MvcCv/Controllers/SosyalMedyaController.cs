@@ -14,24 +14,20 @@ namespace MvcCv.Controllers
     {
         // GET: SosyalMedya
         SosyalMedyaRepository repo = new SosyalMedyaRepository();
-        public ActionResult Index(string arama, int sayfa = 1)
+        public ActionResult Index(string arama)
         {
             if (!string.IsNullOrEmpty(arama))
             {
                 arama = arama.ToLower();
-                var degerler = repo.List().Where(y => (y.Ad.ToLower().Contains(arama))).OrderBy(y => y.ID)
-                .ToPagedList(sayfa, 10);
-
+                var degerler = repo.List().Where(s => (s.Ad.ToLower().Contains(arama))).OrderBy(s => s.ID).ToList();
                 return View(degerler);
             }
-
             else
             {
-                var degerler = repo.List().OrderBy(y => y.ID)
-                .ToPagedList(sayfa, 10);
-
-                return View(degerler);
+               var degerler  = repo.List();
+               return View(degerler);
             }
+
         }
 
 
@@ -48,6 +44,35 @@ namespace MvcCv.Controllers
             {
                 return View("YetenekEkle"); // Hatalarla birlikte formu tekrar göster
             }
+
+            s.Ad = s.Ad.ToLower();
+
+            var ikonlar = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
+                { "instagram", "fa fa-instagram" },
+                { "facebook", "fa fa-facebook" },
+                { "twitter", "fa fa-twitter" },
+                { "linkedin", "fa fa-linkedin" },
+                { "youtube", "fa fa-youtube" },
+                { "github", "fa fa-github" },
+                { "tiktok", "fa fa-tiktok" },
+                { "pinterest", "fa fa-pinterest" },
+                { "snapchat", "fa fa-snapchat" },
+                { "telegram", "fa fa-telegram" },
+                { "reddit", "fa fa-reddit" },
+                { "tumblr", "fa fa-tumblr" },
+                { "medium", "fa fa-medium" },
+            };
+
+            if (!string.IsNullOrEmpty(s.Ad) && ikonlar.ContainsKey(s.Ad.Trim()))
+            {
+                s.İkon = ikonlar[s.Ad.Trim().ToLower()];
+            }
+            else
+            {
+                s.İkon = "fa fa-globe"; // bilinmeyen platform için varsayılan ikon
+            }
+
 
             repo.Add(s);
 
@@ -75,11 +100,12 @@ namespace MvcCv.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("DeneyimGetir"); // Hatalarla birlikte formu tekrar göster
+                return View("SosyalMedyaGuncelle",medya.ID); // Hatalarla birlikte formu tekrar göster
             }
 
             var mdy = repo.TGet(medya.ID);
             mdy.Ad = medya.Ad;
+            mdy.Link = medya.Link;
             repo.TUpdate(mdy);
 
             TempData["SuccessMessage"] = "Medya basariyla guncellendi";

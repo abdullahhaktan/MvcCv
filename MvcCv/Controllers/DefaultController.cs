@@ -7,15 +7,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Net.Mail;
-using System.Configuration;
 using System.Net;
 
 namespace MvcCv.Controllers
 {
+    [AllowAnonymous]
     public class DefaultController : Controller
     {
         // GET: Default
-        DbCvEntities db = new DbCvEntities();
+        DbCvEntities1 db = new DbCvEntities1();
         public ActionResult Index()
         {
             var degerler = db.TblHakkimda.ToList();

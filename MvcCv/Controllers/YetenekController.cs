@@ -12,6 +12,8 @@ namespace MvcCv.Controllers
     public class YetenekController : Controller
     {
         YetenekRepository repo = new YetenekRepository();
+
+        [Authorize]
         public ActionResult Index(string arama , int sayfa=1)
         {
             if (!string.IsNullOrEmpty(arama))
