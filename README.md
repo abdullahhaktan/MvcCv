@@ -3,7 +3,7 @@
 ## Özellikler
 
 - AdminLTE kullanarak güçlü template desteği
-- Dinmaik veriler 
+- Dinamik veriler 
 - Controller ile sistemin yönetimi
 - Partial View kullanarak yönetimin kolaylaştırılması   
 - Repository design pattern kullanarak clean code yazımı
@@ -57,11 +57,11 @@ Gerekirse: Tools > NuGet Package Manager > Restore NuGet Packages
 
 
 
-
 ![image](https://github.com/user-attachments/assets/efcb7144-9cb0-4d7a-870e-08df9acca3ce)
 ![image](https://github.com/user-attachments/assets/f9c4b242-7f1e-4531-b4e0-613de03b6ca3)
 ![image](https://github.com/user-attachments/assets/f221471c-e057-4489-8bfe-a8eb247962a7)
 ![image](https://github.com/user-attachments/assets/21f863bb-24e9-4db4-9ebd-9cf3552afc8a)
+![image](https://github.com/user-attachments/assets/9fd5ecbb-778a-4df7-b84f-5373c8007486)
 ![image](https://github.com/user-attachments/assets/74481349-cf03-4270-9279-3b474b3c5dcc)
 ![image](https://github.com/user-attachments/assets/7aa01742-bcce-4308-95a3-c652f148aecb)
 ![image](https://github.com/user-attachments/assets/2297459c-148c-4acc-9c12-b2e1637e6c28)
