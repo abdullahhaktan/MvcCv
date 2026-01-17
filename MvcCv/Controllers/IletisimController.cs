@@ -1,9 +1,6 @@
 ﻿using MvcCv.Models.Entity;
 using MvcCv.Repositories;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using X.PagedList;
 
@@ -11,11 +8,15 @@ namespace MvcCv.Controllers
 {
     public class IletisimController : Controller
     {
-       ContactRepository  repo = new ContactRepository();
+        // Repository for contact messages data operations
+        ContactRepository repo = new ContactRepository();
+
+        // Display contact messages with search and pagination
         public ActionResult Index(string arama, int sayfa = 1)
         {
             var liste = repo.List();
 
+            // Search functionality across multiple fields
             if (!string.IsNullOrEmpty(arama))
             {
                 arama = arama.ToLower();
@@ -27,18 +28,21 @@ namespace MvcCv.Controllers
                 ).ToList();
             }
 
+            // Apply pagination (10 items per page) with newest messages first
             var pagedList = liste
                 .OrderByDescending(y => y.Tarih)
                 .ToPagedList(sayfa, 10);
 
+            // Remove time portion from dates for display purposes
             foreach (var item in pagedList)
             {
-                item.Tarih = item.Tarih.Value.Date; // Saat: 00:00:00 olur, tip bozulmaz
+                item.Tarih = item.Tarih.Value.Date; // Sets time to 00:00:00, doesn't break type
             }
 
             return View(pagedList);
         }
 
+        // Delete contact message by ID
         public ActionResult MailSil(int id)
         {
             Tbliletisim mesaj = repo.Find(d => d.Id == id);

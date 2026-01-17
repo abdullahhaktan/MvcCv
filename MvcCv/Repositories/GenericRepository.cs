@@ -3,11 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Web;
 
 namespace MvcCv.Repositories
 {
-	public class GenericRepository<T> where T : class , new()
+    public class GenericRepository<T> where T : class, new()
     {
         DbCvEntities1 db = new DbCvEntities1();
 

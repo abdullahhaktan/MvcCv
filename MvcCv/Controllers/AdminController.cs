@@ -1,26 +1,23 @@
 ﻿using MvcCv.Models.Entity;
 using MvcCv.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace MvcCv.Controllers
 {
-    [AllowAnonymous]
+    [AllowAnonymous] // Allow access without authentication
     public class AdminController : Controller
     {
+        // Repository pattern for TblAdmin entity
         GenericRepository<TblAdmin> repo = new GenericRepository<TblAdmin>();
 
-        // Listeleme
+        // List all admin users
         public ActionResult Index()
         {
             var degerler = repo.List();
             return View(degerler);
         }
 
-        // Silme
+        // Delete admin by ID
         public ActionResult AdminSil(int id)
         {
             var admin = repo.Find(x => x.ID == id);
@@ -28,14 +25,14 @@ namespace MvcCv.Controllers
             return RedirectToAction("Index");
         }
 
-        // Ekleme (GET)
+        // Display form for adding new admin (GET)
         [HttpGet]
         public ActionResult AdminEkle()
         {
             return View();
         }
 
-        // Ekleme (POST)
+        // Process admin addition (POST)
         [HttpPost]
         public ActionResult AdminEkle(TblAdmin a)
         {
@@ -43,7 +40,7 @@ namespace MvcCv.Controllers
             return RedirectToAction("Index");
         }
 
-        // Güncelleme (GET)
+        // Display form for updating admin (GET)
         [HttpGet]
         public ActionResult AdminGuncelle(int id)
         {
@@ -51,7 +48,7 @@ namespace MvcCv.Controllers
             return View(admin);
         }
 
-        // Güncelleme (POST)
+        // Process admin update (POST)
         [HttpPost]
         public ActionResult AdminGuncelle(TblAdmin a)
         {
@@ -61,6 +58,5 @@ namespace MvcCv.Controllers
             repo.TUpdate(admin);
             return RedirectToAction("Index");
         }
-
     }
 }
